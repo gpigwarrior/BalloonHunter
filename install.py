@@ -5,9 +5,12 @@ if(downstall):
     os.system("pip install sondehub")
     os.system("pip install googlemaps")
     os.system("pip install twilio")
+    os.system("pip install slack_sdk")
+    os.system("pip install dotenv")
+
 else:
     print("OK")
-    print("Packages to install: sondehub, googlemaps, twilio")
+    print("Packages to install: sondehub, googlemaps, twilio, slack_sdk, dotenv")
 if("y"==input("Do you want to updates option file?(If this is your first time say yes) [y/n]: ")):
     distance = int(input("What radius from you do you want to recive sonde notifications(int): "))
     note_alt = int(input("What alt do you want to trigger the notification, look at what alt balloons in your area loose signal and add 500m(int): "))

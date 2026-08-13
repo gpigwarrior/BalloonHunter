@@ -44,7 +44,7 @@ def on_message(message):
     dist = calc_distance(A, B, C, D)
     # print(dist)
 
-    if 1 < options["distance"] and int(balloon_alt) < options["note_alt"]:
+    if dist < options["distance"] and int(balloon_alt) < options["note_alt"]:
         print(message)
         try:
             balloon_frequ = message["frequency"]
@@ -105,7 +105,7 @@ def on_message(message):
             # for sending slack message
             Notification.slack_everyone(
                 "C08101JEU94",
-                "TEST Baloon alert \n There is a balloon("
+                "Baloon alert \n There is a balloon("
                 + balloon_type
                 + ") @ "
                 + str(D)

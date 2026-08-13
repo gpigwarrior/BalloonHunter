@@ -11,6 +11,8 @@ from email.mime.text import MIMEText
 import os
 from slack_sdk import WebClient
 from slack_sdk.errors import SlackApiError
+from dotenv import load_dotenv, dotenv_values
+
 
 # Others:
 from requests.api import request
@@ -45,10 +47,14 @@ def email_me(subject, body):
     smtp_server.quit()
 
 
-client = WebClient(token=os.environ["SLACK_BOT_TOKEN"])
+# client = WebClient(token=os.getenv("SLACK_BOT_TOKEN"))
 
 
 def slack_everyone(channel_id, message):
+
+    load_dotenv()
+    client = WebClient(token=os.getenv("SLACK_BOT_TOKEN"))
+    # print(client)
     try:
         response = client.chat_postMessage(channel=channel_id, text=message)
         print(f"Message sent to {channel_id}: {response['message']['text']}")

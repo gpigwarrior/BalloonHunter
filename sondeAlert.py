@@ -42,8 +42,9 @@ def on_message(message):
 
     balloon_alt = message["alt"]  # Gets the balloons current alt
     dist = calc_distance(A, B, C, D)
+    # print(dist)
 
-    if dist < options["distance"] and int(balloon_alt) < options["note_alt"]:
+    if 1 < options["distance"] and int(balloon_alt) < options["note_alt"]:
         print(message)
         try:
             balloon_frequ = message["frequency"]
@@ -56,9 +57,9 @@ def on_message(message):
         print(round(dist))
         guess_landing = landingGuess.glanding(message)
         print(guess_landing)
-        timeToBalloon = maper.time_to_destination(
-            str(B) + "," + str(A), str(guess_landing[0]) + "," + str(guess_landing[1])
-        )
+        # timeToBalloon = maper.time_to_destination(
+        #     str(B) + "," + str(A), str(guess_landing[0]) + "," + str(guess_landing[1])
+        # )
         if options["msg_type"] == "txtmsg":
             # for texting the user
             Notification.text_me(
@@ -73,7 +74,7 @@ def on_message(message):
                 + ". On:"
                 + str(balloon_frequ)
                 + "MHZ. ETA:"
-                + str(timeToBalloon)
+                # + str(timeToBalloon)
                 + " Predicted landing: "
                 + str(guess_landing[1])
                 + " ,"
@@ -94,7 +95,28 @@ def on_message(message):
                 + ". On:"
                 + str(balloon_frequ)
                 + "MHZ. ETA:"
-                + str(timeToBalloon)
+                # + str(timeToBalloon)
+                + " Predicted landing: "
+                + str(guess_landing[1])
+                + " ,"
+                + str(guess_landing[0]),
+            )
+        elif options["msg_type"] == "slack":
+            # for sending slack message
+            Notification.slack_everyone(
+                "C08101JEU94",
+                "TEST Baloon alert \n There is a balloon("
+                + balloon_type
+                + ") @ "
+                + str(D)
+                + ","
+                + str(C)
+                + " At alt:"
+                + str(balloon_alt)
+                + ". On:"
+                + str(balloon_frequ)
+                + "MHZ. ETA:"
+                # + str(timeToBalloon)
                 + " Predicted landing: "
                 + str(guess_landing[1])
                 + " ,"
@@ -114,7 +136,7 @@ def on_message(message):
                 + ". On:"
                 + str(balloon_frequ)
                 + "MHZ. ETA:"
-                + str(timeToBalloon)
+                # + str(timeToBalloon)
                 + " Predicted landing: "
                 + str(guess_landing[1])
                 + " ,"
@@ -127,7 +149,7 @@ def on_message(message):
         pass
 
 
-# test = sondehub.Stream(on_message=on_message)
+test = sondehub.Stream(on_message=on_message)
 # print(test)
 # on_message(test)
 animation = "|/-\\"
